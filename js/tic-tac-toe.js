@@ -45,5 +45,23 @@ function startRound(userSelection, computerSelection) {
         userSelection = prompt("Choose your weapon: Rock, Paper or Scissor");
     }
 
+    if (userSelection === computerSelection) {
+        return startRound(prompt("Ties! Choose again."), getComputerChoice());
+    }
+
+    let winMessage = `You win! ${userSelection} beats ${computerSelection}`;
+    let loseMessage = `You lose! ${computerSelection} beats ${userSelection}`;
+    switch (userSelection){
+        case "Rock":
+            return (computerSelection === "Scissors") ? winMessage : loseMessage;
+        
+        case "Scissors":
+            return (computerSelection === "Paper") ? winMessage : loseMessage;
+        
+        case "Paper":
+            return (computerSelection === "Rock") ? winMessage : loseMessage;
+
+    }
+
     return 0;
 }
