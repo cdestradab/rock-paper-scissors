@@ -41,13 +41,9 @@ function startRound(userSelection, computerSelection) {
 
     userSelection = toSentenceCase(userSelection);
 
-    if (userSelection === "Rock"  ||
-        userSelection === "Paper" ||
-        userSelection === "Scissors") {
-            console.log("User input accepted as :" + userSelection);
-        } else {
-            userSelection = prompt("Choose Rock, Paper or Scissor");
-        }
+    while (!validateUserSelection(userSelection, ["Rock", "Paper", "Scissors"])) {
+        userSelection = prompt("Choose your weapon: Rock, Paper or Scissor");
+    }
 
     return 0;
 }
