@@ -25,13 +25,17 @@ function toSentenceCase(text="") {
 }
 
 
-// function validateUserInput(userInput, expectedInputs) {
-//     let validated = false;
+function validateUserSelection(userInput, expectedInputs = []) {
+    let validated = false;
 
-//     for (option in expectedInputs) {
-//         if userInput.
-//     }
-// }
+    for (i in expectedInputs) {
+        if (userInput === expectedInputs[i]) {
+            validated = true;
+        }
+    }
+
+    return validated;
+}
 
 function startRound(userSelection, computerSelection) {
 
