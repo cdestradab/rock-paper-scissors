@@ -13,3 +13,54 @@
                 THEN RETURN "Paper"
             IF randomNumber is 2
                 THEN RETURN "Scissors"
+
+2. Create a function that plays a single round of the TicTacToe game
+
+    CONSTRAINTS:
+        - It takes to parameters "playerSelection" and "computerSelection"
+        - The result of a tie is starting another round. Only one can win.
+        - It follows the game rules:
+            - Paper beats Rock
+            - Rock beats Scissors
+            - Scissors beat Paper
+        - It has to handle the user input to make it case-insensitive
+    
+    PSEUDO:
+
+        IMPORT getComputerChoice()
+
+        DECLARE function startRound()
+            DECLARE variable computerSelection that takes a value from calling getComputerChoice()
+            DECLARE variable userSelection that takes a value from an user input, and make it capitalized.
+            
+            EVALUATE userSelection to check that it match the three possible choices
+                IF userSelection is "Rock" or "Paper" or "Scissors"
+                    CONTINUE
+                ELSE
+                    ASK INPUT for userSelection
+            
+            EVALUATE the choices from userSelection and computerSelection to know the winner
+                IF userSelection is equal to computerSelection
+                    CALL function startRound() to start again
+                ELSE
+                    IF userSelection = "Rock"
+                        EVALUATE computerSelection
+                            IF computerSelection = "Scissors"
+                                RETURN "You win!" userSelection "beats" computerSelection
+                            ELSE
+                                RETURN "You lose!" computerSelection "beats" userSelection
+
+                    IF userSelection = "Scissors"
+                        EVALUATE computerSelection
+                            IF computerSelection = "Paper"
+                                RETURN "You win!" userSelection "beats" computerSelection
+                            ELSE
+                                RETURN "You lose!" computerSelection "beats" userSelection
+
+                    
+                    IF userSelection = "Paper"
+                        EVALUATE computerSelection
+                            IF computerSelection = "Rock"
+                                RETURN "You win!" userSelection "beats" computerSelection
+                            ELSE
+                                RETURN "You lose!" computerSelection "beats" userSelection

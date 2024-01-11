@@ -17,3 +17,33 @@ function getComputerChoice() {
 
     return randomChoice;
 }
+
+function sentenceCase(text="") {
+    text = text.toLowerCase();
+    
+    return text[0].toUpperCase() + text.slice(1);
+}
+
+
+// function validateUserInput(userInput, expectedInputs) {
+//     let validated = false;
+
+//     for (option in expectedInputs) {
+//         if userInput.
+//     }
+// }
+
+function startRound(userSelection, computerSelection) {
+
+    userSelection = userSelection.toUpperCase();
+
+    if (userSelection === "Rock"  ||
+        userSelection === "Paper" ||
+        userSelection === "Scissors") {
+            console.log("User input accepted as :" + userSelection);
+        } else {
+            userSelection = prompt("Choose Rock, Paper or Scissor");
+        }
+
+    return 0;
+}
