@@ -18,7 +18,7 @@ function getComputerChoice() {
     return randomChoice;
 }
 
-function sentenceCase(text="") {
+function toSentenceCase(text="") {
     text = text.toLowerCase();
     
     return text[0].toUpperCase() + text.slice(1);
@@ -35,7 +35,7 @@ function sentenceCase(text="") {
 
 function startRound(userSelection, computerSelection) {
 
-    userSelection = userSelection.toUpperCase();
+    userSelection = toSentenceCase(userSelection);
 
     if (userSelection === "Rock"  ||
         userSelection === "Paper" ||
