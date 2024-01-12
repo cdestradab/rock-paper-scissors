@@ -66,7 +66,7 @@
                                 RETURN "You win!" userSelection "beats" computerSelection
                             ELSE
                                 RETURN "You lose!" computerSelection "beats" userSelection
-<<<<<<< HEAD
+    ```
 
 3. Create a function that starts the game setting a number of rounds and announces the winner
 
@@ -75,6 +75,7 @@
         - There is only one winner in the game, a player wins the game if he wins more than half of the rounds of the game.
     
     PSEUDO:
+    ```
         IMPORT startRound()
         IMPORT getComputerChoice()
         
@@ -104,8 +105,4 @@
                     IF computer is equal to ((numberOfRounds/2).FLOOR_DOWN + 1)
                         THEN RETURN "You lose the game"
             END FOR
-
-
-=======
-```
->>>>>>> 55e5c844f36ab3d182186c8c14791c136d625821
+    ```
