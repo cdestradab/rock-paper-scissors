@@ -39,6 +39,7 @@ function validateUserSelection(userInput, expectedInputs = []) {
 function askUserChoice() {
     let getChoice = () => {
         let choice = prompt("Choose your weapon: Rock, Paper or Scissor");
+        if (choice === "") {choice = " "};
         choice = toSentenceCase(choice);
         
         return choice;
@@ -85,11 +86,25 @@ function startRound(userSelection, computerSelection) {
     return 0;
 }
 
-// function game(numberOfRounds) {
-//     let playerScore = 0;
-//     let computerScore = 0;
+function game(numberOfRounds = 5) {
+    const MAX_POINTS = Math.floor(numberOfRounds/2) + 1;
+    console.log(numberOfRounds)
+    let playerScore = 0;
+    let computerScore = 0;
 
-//     for (let i = 0; i < numberOfRounds; index++) {
-                
-//     }
-// }
+    for (let i = 0; i < numberOfRounds; i++) {
+        const winner = startRound(askUserChoice(), getComputerChoice());
+        (winner === "player") ? playerScore++ : computerScore++;
+
+        if (playerScore === MAX_POINTS) {
+            return "You won the game!";
+        } 
+        if (computerScore === MAX_POINTS) {
+            return "You lose!";
+        }
+
+        console.log(`Your score: ${playerScore} | Computer score: ${computerScore}`)
+    }
+
+    return 0;
+}
