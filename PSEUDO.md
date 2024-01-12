@@ -4,6 +4,7 @@
         - There are 3 possible choices: "Rock", "Paper", "Scissors".
 
     PSEUDO:
+   ```
         DECLARE function getRandomNumber
             DECLARE a variable randomNumber that obtains a random number between 0 and 2
 
@@ -13,8 +14,9 @@
                 THEN RETURN "Paper"
             IF randomNumber is 2
                 THEN RETURN "Scissors"
+   ```
 
-2. Create a function that plays a single round of the TicTacToe game
+3. Create a function that plays a single round of the TicTacToe game
 
     CONSTRAINTS:
         - It takes to parameters "playerSelection" and "computerSelection"
@@ -26,7 +28,7 @@
         - It has to handle the user input to make it case-insensitive
     
     PSEUDO:
-
+    ```
         IMPORT getComputerChoice()
 
         DECLARE function startRound()
@@ -64,6 +66,7 @@
                                 RETURN "You win!" userSelection "beats" computerSelection
                             ELSE
                                 RETURN "You lose!" computerSelection "beats" userSelection
+<<<<<<< HEAD
 
 3. Create a function that starts the game setting a number of rounds and announces the winner
 
@@ -103,3 +106,6 @@
             END FOR
 
 
+=======
+```
+>>>>>>> 55e5c844f36ab3d182186c8c14791c136d625821
