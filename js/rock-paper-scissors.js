@@ -24,7 +24,6 @@ function toSentenceCase(text="") {
     return text[0].toUpperCase() + text.slice(1);
 }
 
-
 function validateUserSelection(userInput, expectedInputs = []) {
     let validated = false;
 
@@ -37,31 +36,60 @@ function validateUserSelection(userInput, expectedInputs = []) {
     return validated;
 }
 
-function startRound(userSelection, computerSelection) {
+function askUserChoice() {
+    let getChoice = () => {
+        let choice = prompt("Choose your weapon: Rock, Paper or Scissor");
+        choice = toSentenceCase(choice);
+        
+        return choice;
+    }
 
-    userSelection = toSentenceCase(userSelection);
+    let userSelection = getChoice();
 
     while (!validateUserSelection(userSelection, ["Rock", "Paper", "Scissors"])) {
-        userSelection = prompt("Choose your weapon: Rock, Paper or Scissor");
+        userSelection = getChoice();
     }
+
+    return userSelection;
+}
+
+function startRound(userSelection, computerSelection) {
 
     if (userSelection === computerSelection) {
-        return startRound(prompt("Ties! Choose again."), getComputerChoice());
+        alert("Ties, choose again!");
+        return startRound(askUserChoice(), getComputerChoice());
     }
 
-    let winMessage = `You win! ${userSelection} beats ${computerSelection}`;
-    let loseMessage = `You lose! ${computerSelection} beats ${userSelection}`;
+    let winMessage = () => {
+        console.log(`You win! ${userSelection} beats ${computerSelection}`);
+        return "player";
+    }
+    let loseMessage = () => {
+        console.log(`You lose! ${computerSelection} beats ${userSelection}`);
+        return "computer";
+    }
+    
     switch (userSelection){
         case "Rock":
-            return (computerSelection === "Scissors") ? winMessage : loseMessage;
+            return (computerSelection === "Scissors") ? winMessage() : loseMessage();
         
         case "Scissors":
-            return (computerSelection === "Paper") ? winMessage : loseMessage;
+            return (computerSelection === "Paper") ? winMessage() : loseMessage();
         
         case "Paper":
-            return (computerSelection === "Rock") ? winMessage : loseMessage;
+            return (computerSelection === "Rock") ? winMessage() : loseMessage();
 
     }
 
+    console.log(`${userSelection} | ${computerSelection}`);
     return 0;
 }
+
+// function game(numberOfRounds) {
+//     let playerScore = 0;
+//     let computerScore = 0;
+
+//     for (let i = 0; i < numberOfRounds; index++) {
+                
+//     }
+// }

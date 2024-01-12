@@ -64,3 +64,42 @@
                                 RETURN "You win!" userSelection "beats" computerSelection
                             ELSE
                                 RETURN "You lose!" computerSelection "beats" userSelection
+
+3. Create a function that starts the game setting a number of rounds and announces the winner
+
+    CONSTRAINTS: 
+        - There is a previously set number of rounds X that must be played.
+        - There is only one winner in the game, a player wins the game if he wins more than half of the rounds of the game.
+    
+    PSEUDO:
+        IMPORT startRound()
+        IMPORT getComputerChoice()
+        
+        DECLARE function game(numberOfRounds)
+
+            DECLARE variable playerScore initialized at 0
+            DECLARE variable computerScore initialized at 0
+
+            
+
+            FOR 0 to numberOfRounds:
+
+                DECLARE constant userChoice equal to a PROMPT value asked to the user. // Maybe asking a prompt option should be a function itself.
+                DECLARE constant computerChoice equals to getComputerChoice()
+                
+                DECLARE constant winner that is equal to CALL startRound(playerScore, computerScore)
+
+                EVALUATE who wins in the current round and assign the score to the winner
+                    IF winner is equal to "player"
+                        THEN playerScore++
+                    ELSE IF winner is equal to "computer"
+                        THEN computerScore ++
+
+                EVALUATE if there is a winner for the whole game
+                    IF userScore is equal to ((numberOfRounds/2).FLOOR_DOWN + 1)
+                        THEN RETURN "You win the game"
+                    IF computer is equal to ((numberOfRounds/2).FLOOR_DOWN + 1)
+                        THEN RETURN "You lose the game"
+            END FOR
+
+
