@@ -92,16 +92,15 @@ function game(numberOfRounds = 5) {
     let playerScore = 0;
     let computerScore = 0;
 
-    for (let i = 0; i < numberOfRounds; i++) {
+    for (let i = 0; i < (numberOfRounds + 1); i++) {
         const winner = startRound(askUserChoice(), getComputerChoice());
         (winner === "player") ? playerScore++ : computerScore++;
 
         if (playerScore === MAX_POINTS) {
             return "You won the game!";
-        } 
-        if (computerScore === MAX_POINTS) {
+        } else if (computerScore === MAX_POINTS) {
             return "You lose!";
-        }
+        } 
 
         console.log(`Your score: ${playerScore} | Computer score: ${computerScore}`)
     }
