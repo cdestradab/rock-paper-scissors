@@ -107,3 +107,28 @@ function game(numberOfRounds = 5) {
 
     return 0;
 }
+
+// UI LOGIC
+
+
+let playerSelection;
+const playerOptions = document.querySelector('.rps-ui');
+playerOptions.addEventListener('click', (e) => {
+    let choice = e.target;
+
+    switch(choice.id) {
+        case 'btn-rock':
+            playerSelection = "Rock";
+            break;
+
+        case 'btn-paper':
+            playerSelection = "Paper";
+            break;
+        
+        case 'btn-scissors':
+            playerSelection = "Scissors";
+            break;
+    }
+
+    console.log(`Player selected ${playerSelection}`);
+})
