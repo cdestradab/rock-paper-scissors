@@ -109,7 +109,15 @@ function game(numberOfRounds = 5) {
 }
 
 // UI LOGIC
+const resultsContainer = document.querySelector('.rps-results');
 
+function showMessage(message, container) {
+    container.lastChild.remove();
+    const newMessage = document.createElement('p');
+    newMessage.textContent = message;
+
+    container.appendChild(newMessage);
+}
 
 let playerSelection;
 const playerOptions = document.querySelector('.rps-ui');
@@ -130,5 +138,5 @@ playerOptions.addEventListener('click', (e) => {
             break;
     }
 
-    console.log(`Player selected ${playerSelection}`);
+    showMessage(`Player selected ${playerSelection}`, resultsContainer);
 })
