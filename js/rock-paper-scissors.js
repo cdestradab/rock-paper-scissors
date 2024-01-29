@@ -1,10 +1,10 @@
-function getRandomInt(n) {
+const getRandomInt = function(n) {
     let randomNumber = Math.floor((Math.random()*n));
 
     return randomNumber;
 }
 
-function getComputerChoice() {
+const getComputerChoice = function() {
     let randomNumber = getRandomInt(3);
 
     let randomChoice;
@@ -18,13 +18,13 @@ function getComputerChoice() {
     return randomChoice;
 }
 
-function toSentenceCase(text="") {
+const toSentenceCase = function(text="") {
     text = text.toLowerCase();
     
     return text[0].toUpperCase() + text.slice(1);
 }
 
-function validateUserSelection(userInput, expectedInputs = []) {
+const validateUserSelection = function(userInput, expectedInputs = []) {
     let validated = false;
 
     for (i in expectedInputs) {
@@ -36,7 +36,23 @@ function validateUserSelection(userInput, expectedInputs = []) {
     return validated;
 }
 
-function askUserChoice() {
+const showMessage = function(message, selector, deletePreviousContent = true) {
+    if (message !== null && message !== 0) {
+        const container = document.querySelector(selector);
+        const newMessage = document.createElement('p');
+
+        if (deletePreviousContent && container.hasChildNodes()) {
+            container.innerHTML = "";
+        }
+
+        newMessage.textContent = message;
+        container.appendChild(newMessage);
+    }
+
+    return message;
+}
+
+/* function askUserChoiceByPrompt() {
     let getChoice = () => {
         let choice = prompt("Choose your weapon: Rock, Paper or Scissor");
         if (choice === "") {choice = " "};
@@ -52,21 +68,22 @@ function askUserChoice() {
     }
 
     return userSelection;
-}
+} */
 
-function startRound(userSelection, computerSelection) {
+//requires showMessage()
+const startRound = function(userSelection, computerSelection) {
 
     if (userSelection === computerSelection) {
-        alert("Ties, choose again!");
-        return startRound(askUserChoice(), getComputerChoice());
+        showMessage("Ties, choose again!", '.rps-results', false);
+        return "ties";
     }
 
     let winMessage = () => {
-        console.log(`You win! ${userSelection} beats ${computerSelection}`);
+        showMessage(`You win! ${userSelection} beats ${computerSelection}`, '.rps-results', false);
         return "player";
     }
     let loseMessage = () => {
-        console.log(`You lose! ${computerSelection} beats ${userSelection}`);
+        showMessage(`You lose! ${computerSelection} beats ${userSelection}`, '.rps-results', false);
         return "computer";
     }
     
@@ -79,14 +96,13 @@ function startRound(userSelection, computerSelection) {
         
         case "Paper":
             return (computerSelection === "Rock") ? winMessage() : loseMessage();
-
     }
-
-    console.log(`${userSelection} | ${computerSelection}`);
+    
     return 0;
 }
 
-function game(numberOfRounds = 5) {
+//requires showMessage()
+/* const game = function(numberOfRounds = 5) {
     const MAX_POINTS = Math.floor(numberOfRounds/2) + 1;
     console.log(numberOfRounds)
     let playerScore = 0;
@@ -102,41 +118,97 @@ function game(numberOfRounds = 5) {
             return "You lose!";
         } 
 
-        console.log(`Your score: ${playerScore} | Computer score: ${computerScore}`)
+        showMessage(`Your score: ${playerScore} | Computer score: ${computerScore}`, '.rps-score');
     }
+
+    return 0;
+} */
+
+// UI LOGIC
+
+const resultsContainer = document.querySelector('.rps-results');
+const scoreContainer = document.querySelector('.rps-score');
+showMessage(`Your score: 0 | Computer score: 0`, '.rps-score');
+showMessage("Choose your weapon: Rock, Paper or Scissor", '.rps-results');
+
+function captureUserChoice() {
+    let playerSelection;
+    const playerOptions = document.querySelector('.rps-ui');
+    playerOptions.addEventListener('click', (e) => {
+        let choice = e.target;
+
+        switch(choice.id) {
+            case 'btn-rock':
+                playerSelection = "Rock";
+                showMessage(`Player selected ${playerSelection}`, '.rps-results', true);
+                initGame(playerSelection);
+                break;
+
+            case 'btn-paper':
+                playerSelection = "Paper";
+                showMessage(`Player selected ${playerSelection}`, '.rps-results', true);
+                initGame(playerSelection);
+                break;
+            
+            case 'btn-scissors':
+                playerSelection = "Scissors";
+                showMessage(`Player selected ${playerSelection}`, '.rps-results', true);
+                initGame(playerSelection);
+                break;
+        }
+
+        
+    })
 
     return 0;
 }
 
-// UI LOGIC
-const resultsContainer = document.querySelector('.rps-results');
+let gameOn = false;
+const numberOfRounds = 5;
+const MAX_POINTS = Math.floor(numberOfRounds/2) + 1;
+let playerScore = 0;
+let computerScore = 0;
+let round = 0;
+function initGame(userSelection) {
+    let result;
 
-function showMessage(message, container) {
-    container.lastChild.remove();
-    const newMessage = document.createElement('p');
-    newMessage.textContent = message;
+    if (!gameOn) {
+        gameOn = true;
+        playerScore = 0;
+        computerScore = 0;
+        round = 0;
 
-    container.appendChild(newMessage);
-}
-
-let playerSelection;
-const playerOptions = document.querySelector('.rps-ui');
-playerOptions.addEventListener('click', (e) => {
-    let choice = e.target;
-
-    switch(choice.id) {
-        case 'btn-rock':
-            playerSelection = "Rock";
-            break;
-
-        case 'btn-paper':
-            playerSelection = "Paper";
-            break;
-        
-        case 'btn-scissors':
-            playerSelection = "Scissors";
-            break;
+        result = newRound(userSelection);
+        showMessage(result, '.rps-results', false);
+    } else {
+        result = newRound(userSelection);
+        showMessage(result, '.rps-results', false);
     }
 
-    showMessage(`Player selected ${playerSelection}`, resultsContainer);
-})
+    function newRound(userSelection) {
+        const showScore = () => showMessage(`Your score: ${playerScore} | Computer score: ${computerScore}`, '.rps-score');
+
+        if (round < numberOfRounds + 1) {
+            const winner = startRound(userSelection, getComputerChoice());
+            if (winner !== "ties") {
+                (winner === "player") ? playerScore++ : computerScore++;
+            }
+
+            showScore();
+
+            if (playerScore === MAX_POINTS) {
+                gameOn = false;
+                showScore();
+                return "You won the game!";
+            } else if (computerScore === MAX_POINTS) {
+                gameOn = false;
+                showScore();
+                return "You lost the game!";
+            }
+        }
+
+        return 0
+    }
+}
+
+captureUserChoice();

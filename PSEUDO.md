@@ -16,7 +16,7 @@
                 THEN RETURN "Scissors"
    ```
 
-3. Create a function that plays a single round of the TicTacToe game
+2. Create a function that plays a single round of the TicTacToe game
 
     CONSTRAINTS:
         - It takes to parameters "playerSelection" and "computerSelection"
@@ -106,3 +106,19 @@
                         THEN RETURN "You lose the game"
             END FOR
     ```
+
+4. Integrate the UI to the game's logic
+
+    CONSTRAINTS:
+        - The input for the user are the three buttons on the webpage
+    
+    PSEUDO:
+    > MAIN
+        - The user clicks one of three buttons that represent a choice.
+        - An event listener captures the click and stores the value of the choice
+        - With the same event listener, verify that there is a game on
+            - YES: Continue the next round
+            - NO: Start a game with a first round
+    
+
+
