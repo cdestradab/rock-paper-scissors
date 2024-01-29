@@ -189,7 +189,10 @@ function initGame(userSelection) {
         const showScore = () => showMessage(`Your score: ${playerScore} | Computer score: ${computerScore}`, '.rps-score');
 
         if (round < numberOfRounds + 1) {
-            const winner = startRound(userSelection, getComputerChoice());
+            const computerChoice = getComputerChoice();
+            showMessage(`Machine selected ${computerChoice}`, '.rps-results', false);
+            const winner = startRound(userSelection, computerChoice);
+
             if (winner !== "ties") {
                 (winner === "player") ? playerScore++ : computerScore++;
             }
